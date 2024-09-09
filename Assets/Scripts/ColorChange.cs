@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
-public class GameManager : MonoBehaviour
+public class ColorChange : MonoBehaviour
 {
-    public TextMeshProUGUI scoreText;
+    public Color color;
+    public SpriteRenderer sprite;
 
     // Start is called before the first frame update
     void Start()
@@ -17,11 +17,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
-     
     }
 
-    public void UpdateScore(int score)
+    public void ChangeColor(Color newColor)
     {
-        scoreText.text = "Score: " + score.ToString();
-    } 
+        color = newColor;
+    }
 }
