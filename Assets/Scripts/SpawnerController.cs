@@ -4,24 +4,31 @@ using UnityEngine;
 
 public class SpawnerController : MonoBehaviour
 {
-    public float spawnInterval = 3f;
-    public float spawnTimer = 0f;
-    public GameObject objectPrefab;
+    [SerializeField] float spawnInterval;
+    [SerializeField] float xBound;
+    [SerializeField] float yBound;
+    [SerializeField] GameObject objectPrefab;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        InvokeRepeating("SpawnObject", spawnInterval, 3);
     }
 
     // Update is called once per frame
     void Update()
     {
-        spawnTimer += Time.deltaTime;
-        if (spawnTimer >= spawnInterval)
-        {
-            spawnTimer = 0f;
-            Instantiate(objectPrefab, Vector3.zero, Quaternion.identity);
-        }
+    }
+
+    private void SpawnObject()
+    {
+        Instantiate(objectPrefab, GetRandomPosition(), Quaternion.identity);
+    }
+
+    private Vector3 GetRandomPosition()
+    {
+        float x = Random.Range(-xBound, xBound);
+        float y = Random.Range(-yBound, yBound);
+        return new Vector3(x, y, 0);
     }
 }

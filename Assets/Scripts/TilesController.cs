@@ -9,11 +9,14 @@ public class TilesController : MonoBehaviour
     public Vector3 originPosition;
     public float cellSize;
     public GameObject tilePrefab;
+    public GameObject tileParent;
+    public GameObject[,] tiles;
 
     // Start is called before the first frame update
     void Start()
     {
-
+       tiles = new GameObject[width, height];
+       SpawnTiles();
     }
 
     // Update is called once per frame
@@ -22,9 +25,18 @@ public class TilesController : MonoBehaviour
         
     }
 
-    private void OnDrawGizmos()
+    private void SpawnTiles()
     {
-        DrawLine();
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                GameObject tile = Instantiate(tilePrefab, GetWorldPosition(x, y) + new Vector3(0.5f, 0.5f, 0), Quaternion.identity);
+                tile.name = "Tile";
+                tile.transform.SetParent(tileParent.transform);
+                tiles[x, y] = tile;
+            }
+        }
     }
 
     private Vector3 GetWorldPosition(float x, float y)
@@ -32,17 +44,10 @@ public class TilesController : MonoBehaviour
         return originPosition + new Vector3(x, y) * cellSize;
     }
 
-    public void DrawLine()
+    public GameObject GetRandomTile()
     {
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y + 1), Color.white);
-                Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white);
-            }
-        }
-        Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.white);
-        Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.white);
+        int x = Random.Range(0, width);
+        int y = Random.Range(0, height);
+        return tiles[x, y];
     }
 }

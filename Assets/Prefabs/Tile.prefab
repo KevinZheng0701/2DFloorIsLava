@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1342024633442111781}
   - component: {fileID: 7253711351690919921}
   - component: {fileID: 6280319245983765308}
+  - component: {fileID: 5205307606772420377}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Floor
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.5566038, g: 0.2966803, b: 0.2966803, a: 1}
+  m_Color: {r: 0.6037736, g: 0.093983635, b: 0.093983635, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -98,4 +99,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0, b: 0, a: 0}
-  sprite: {fileID: 0}
+  sprite: {fileID: 7253711351690919921}
+--- !u!114 &5205307606772420377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786641863692480685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b04f77c072081408a1e1658aa7d5ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
