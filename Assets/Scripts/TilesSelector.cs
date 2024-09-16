@@ -1,21 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
-using System.Threading;
 
 public class TilesSelector : MonoBehaviour
 {
-    [SerializeField] TilesController tileController;
     private float timer;
+    [SerializeField] TilesController tileController;
     [SerializeField] float tilesInterval;
     [SerializeField] GameManager gameManager;
-    private List<GameObject> selectedTiles;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -24,7 +21,8 @@ public class TilesSelector : MonoBehaviour
         timer += Time.deltaTime;
         if (timer > tilesInterval)
         {
-            SelectTiles(gameManager.level);
+            timer = 0;
+            SelectTiles((gameManager.level + 1) * 3);
         }
     }
 
@@ -33,17 +31,13 @@ public class TilesSelector : MonoBehaviour
         for (int i = 0; i < numberOfTiles; i++)
         {
             GameObject tile = tileController.GetRandomTile();
-            while (selectedTiles.Contains(tile))
+            TileState state = tile.GetComponent<TileState>();
+            while (state.GetIsSelected())
             {
                 tile = tileController.GetRandomTile();
+                state = tile.GetComponent<TileState>();
             }
-            selectedTiles.Add(tile);
-        }
-        while (selectedTiles.Count > 0)
-        {
-            GameObject tile = selectedTiles[0];
-            selectedTiles.RemoveAt(0);
-            TileState tileStateController = tile.GetComponent<TileState>();
+            state.SelectTile(timer);
         }
     }
 }

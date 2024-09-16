@@ -12,7 +12,7 @@ public class SpawnerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SpawnObject", spawnInterval, 3);
+        InvokeRepeating("SpawnObject", spawnInterval, 7.5f);
     }
 
     // Update is called once per frame

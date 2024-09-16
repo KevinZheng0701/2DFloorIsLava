@@ -8,9 +8,9 @@ public class TilesController : MonoBehaviour
     public int height;
     public Vector3 originPosition;
     public float cellSize;
-    public GameObject tilePrefab;
-    public GameObject tileParent;
     public GameObject[,] tiles;
+    [SerializeField] GameObject tilePrefab;
+    [SerializeField] GameObject tileParent;
 
     // Start is called before the first frame update
     void Start()
