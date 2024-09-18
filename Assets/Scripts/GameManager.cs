@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI timerText;
-    private float timer;
     public int level;
+    public float timer;
+    [SerializeField] TilesSelector tilesSelector;
+    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI timerText;
+    [SerializeField] TextMeshProUGUI levelText;
     [SerializeField] int[] levelTimer;
 
     // Start is called before the first frame update
@@ -22,9 +23,12 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer > levelTimer[level])
+        UpdateTimer();
+        if (level < levelTimer.Length && timer > levelTimer[level])
         {
             level += 1;
+            tilesSelector.tilesInterval -= level / 10f;
+            UpdateLevel();
         }
     }
 
@@ -36,5 +40,10 @@ public class GameManager : MonoBehaviour
     public void UpdateTimer()
     {
         timerText.text = "Time: " + Mathf.Round(timer).ToString();
+    }
+
+    public void UpdateLevel()
+    {
+        levelText.text = "Level: " + level.ToString();
     }
 }

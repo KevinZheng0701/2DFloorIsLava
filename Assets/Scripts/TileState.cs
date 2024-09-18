@@ -24,30 +24,32 @@ public class TileState : MonoBehaviour
                 timer -= Time.deltaTime;
             } else {
                 isSelected = false;
+                colorChangeScript.ChangeColor(Color.white);
             }
         }
     }
 
     public void SelectTile(float time)
     {
-        SelectingTile();
+        StartCoroutine(SelectingTile(time));
         isSelected = true;
         timer = time;
     }
 
-    private void SelectingTile()
+    private IEnumerator SelectingTile(float time)
     {
-        for (int i = 0; i < 3; i++)
-        {
-            StartCoroutine(ChangingColors(.25f));
-            colorChangeScript.ChangeColor(Color.white);
-        }
+        StartCoroutine(ChangingColorsAnimation(time / 10f));
+        yield return new WaitForSeconds(time / 5);
+        StartCoroutine(ChangingColorsAnimation(time / 10f));
+        yield return new WaitForSeconds(time / 5f);
+        colorChangeScript.ChangeColor(Color.red);
     } 
     
-    public IEnumerator ChangingColors(float time)
+    public IEnumerator ChangingColorsAnimation(float time)
     {
         colorChangeScript.ChangeColor(Color.red);
         yield return new WaitForSeconds(time);
+        colorChangeScript.ChangeColor(Color.white);
     }
 
     public bool GetIsSelected()

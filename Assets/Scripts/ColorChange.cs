@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ColorChange : MonoBehaviour
 {
-    public Color color;
     public SpriteRenderer sprite;
 
     // Start is called before the first frame update
@@ -21,6 +20,6 @@ public class ColorChange : MonoBehaviour
 
     public void ChangeColor(Color newColor)
     {
-        color = newColor;
+        sprite.color = newColor;
     }
 }
