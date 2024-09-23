@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WASD : MonoBehaviour
 {
-    public GameManager gameManager;
+    public UIManager uiManager;
     public int score;
     public float horSpeed; // Speed of the player in the horizontal direction
     public float vertSpeed; // Speed of the player in the vertical direction
@@ -47,7 +47,7 @@ public class WASD : MonoBehaviour
         {
             score++;
             Destroy(collider.gameObject);
-            gameManager.UpdateScore(score);
+            uiManager.UpdateScore(score);
         }
     }
 }

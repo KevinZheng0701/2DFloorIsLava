@@ -7,10 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public int level;
     public float timer;
-    [SerializeField] TilesSelector tilesSelector;
-    [SerializeField] TextMeshProUGUI scoreText;
-    [SerializeField] TextMeshProUGUI timerText;
-    [SerializeField] TextMeshProUGUI levelText;
+    [SerializeField] TilesManager tilesManager;
+    [SerializeField] UIManager uiManager;
     [SerializeField] int[] levelTimer;
 
     // Start is called before the first frame update
@@ -23,27 +21,12 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        UpdateTimer();
+        uiManager.UpdateTimer(timer);
         if (level < levelTimer.Length && timer > levelTimer[level])
         {
             level += 1;
-            tilesSelector.tilesInterval -= level / 10f;
-            UpdateLevel();
+            tilesManager.tilesInterval -= level / 10f;
+            uiManager.UpdateLevel(level);
         }
-    }
-
-    public void UpdateScore(int score)
-    {
-        scoreText.text = "Score: " + score.ToString();
-    }
-
-    public void UpdateTimer()
-    {
-        timerText.text = "Time: " + Mathf.Round(timer).ToString();
-    }
-
-    public void UpdateLevel()
-    {
-        levelText.text = "Level: " + level.ToString();
     }
 }

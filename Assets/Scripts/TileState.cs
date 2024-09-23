@@ -31,18 +31,19 @@ public class TileState : MonoBehaviour
 
     public void SelectTile(float time)
     {
-        StartCoroutine(SelectingTile(time));
+        StartCoroutine(SelectingTile(time / 10f));
         isSelected = true;
         timer = time;
     }
 
-    private IEnumerator SelectingTile(float time)
+    private IEnumerator SelectingTile(float delay)
     {
-        StartCoroutine(ChangingColorsAnimation(time / 10f));
-        yield return new WaitForSeconds(time / 5);
-        StartCoroutine(ChangingColorsAnimation(time / 10f));
-        yield return new WaitForSeconds(time / 5f);
+        StartCoroutine(ChangingColorsAnimation(delay));
+        yield return new WaitForSeconds(delay * 2f);
+        StartCoroutine(ChangingColorsAnimation(delay));
+        yield return new WaitForSeconds(delay * 2f);
         colorChangeScript.ChangeColor(Color.red);
+        Debug.Log("Time for tile to turn red: " + delay * 6f);
     } 
     
     public IEnumerator ChangingColorsAnimation(float time)

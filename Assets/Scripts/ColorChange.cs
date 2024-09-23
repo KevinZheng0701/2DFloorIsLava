@@ -6,18 +6,7 @@ public class ColorChange : MonoBehaviour
 {
     public SpriteRenderer sprite;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // Function to visually change the color of the object
     public void ChangeColor(Color newColor)
     {
         sprite.color = newColor;

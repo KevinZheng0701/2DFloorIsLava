@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TilesController : MonoBehaviour
+public class TilesMap : MonoBehaviour
 {
     public int width;
     public int height;
@@ -44,10 +44,23 @@ public class TilesController : MonoBehaviour
         return originPosition + new Vector3(x, y) * cellSize;
     }
 
+    private Vector2Int GetXY(Vector3 worldPosition)
+    {
+        int x = Mathf.FloorToInt((worldPosition.x - originPosition.x) / cellSize);
+        int y = Mathf.FloorToInt((worldPosition.y - originPosition.y) / cellSize);
+        return new Vector2Int(x, y);
+    }
+
     public GameObject GetRandomTile()
     {
         int x = Random.Range(0, width);
         int y = Random.Range(0, height);
         return tiles[x, y];
+    }
+
+    public GameObject GetTileUnderPlayer(Vector3 playerPosition)
+    {
+        Vector2Int xy = GetXY(playerPosition);
+        return tiles[xy.x, xy.y];
     }
 }
