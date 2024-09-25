@@ -40,16 +40,18 @@ public class TileState : MonoBehaviour
     {
         StartCoroutine(ChangingColorsAnimation(delay));
         yield return new WaitForSeconds(delay * 2f);
+        Debug.Log(delay * 2f);
         StartCoroutine(ChangingColorsAnimation(delay));
         yield return new WaitForSeconds(delay * 2f);
+        Debug.Log(delay * 2f);
         colorChangeScript.ChangeColor(Color.red);
-        Debug.Log("Time for tile to turn red: " + delay * 6f);
     } 
     
     public IEnumerator ChangingColorsAnimation(float time)
     {
         colorChangeScript.ChangeColor(Color.red);
         yield return new WaitForSeconds(time);
+        Debug.Log(time);
         colorChangeScript.ChangeColor(Color.white);
     }
 
