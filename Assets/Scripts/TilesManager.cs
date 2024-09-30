@@ -7,10 +7,11 @@ public class TilesManager : MonoBehaviour
     private bool isDanger;
     private float timer;
     public float tilesInterval;
-    [SerializeField] Transform player;
-    [SerializeField] TilesMap tilesMap;
-    [SerializeField] GameManager gameManager;
-    [SerializeField] SceneChanger sceneChanger;
+    public Transform player1;
+    public Transform player2;
+    public TilesMap tilesMap;
+    public GameManager gameManager;
+    public SceneChanger sceneChanger;
     
     // Start is called before the first frame update
     void Start()
@@ -24,14 +25,7 @@ public class TilesManager : MonoBehaviour
         timer += Time.deltaTime;
         if (isDanger)
         {
-            Vector3 playerPos = player.transform.position;
-            GameObject tile = tilesMap.GetTileUnderPlayer(playerPos);
-            SpriteRenderer spriteRender = tile.GetComponent<SpriteRenderer>();
-            if (spriteRender.color == Color.red)
-            {
-                Debug.Log("red!");
-                //sceneChanger.MoveToScene(2);
-            }
+            CheckSafety();
         }
         if (timer > tilesInterval)
         {
@@ -64,5 +58,19 @@ public class TilesManager : MonoBehaviour
         isDanger = true;
         yield return new WaitForSeconds(time * 0.6f);
         isDanger = false;
+    }
+
+    private void CheckSafety()
+    {
+        Vector3 playerPos = player1.transform.position;
+        Vector3 playerPos2 = player2.transform.position;
+        GameObject tile1 = tilesMap.GetTileUnderPlayer(playerPos);
+        GameObject tile2 = tilesMap.GetTileUnderPlayer(playerPos2);
+        SpriteRenderer spriteRender1 = tile1.GetComponent<SpriteRenderer>();
+        SpriteRenderer spriteRender2 = tile2.GetComponent<SpriteRenderer>();
+        if (spriteRender1.color == Color.red || spriteRender2.color == Color.red)
+        {
+            sceneChanger.MoveToScene(2);
+        }
     }
 }

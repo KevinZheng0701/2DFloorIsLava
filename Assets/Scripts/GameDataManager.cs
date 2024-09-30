@@ -11,6 +11,7 @@ public class GameDataManager : MonoBehaviour
     // Called when the scripts are loading
     private void Awake()
     {
+        //Instance = GameObject.FindGameObjectWithTag("Data").GetComponent<GameDataManager>();
         if (Instance == null) // Instance hasn't been set
         {
             Instance = this; // Set the instance to the game object it is attached to
@@ -20,5 +21,10 @@ public class GameDataManager : MonoBehaviour
         {
             Destroy(gameObject); // Destroy duplicate instance
         }
+    }
+
+    public void SetSinglePlayer(bool isSingle)
+    {
+        isSinglePlayer = isSingle;
     }
 }

@@ -5,9 +5,9 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI scoreText;
-    [SerializeField] TextMeshProUGUI timerText;
-    [SerializeField] TextMeshProUGUI levelText;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI timerText;
+    public TextMeshProUGUI levelText;
 
     public void UpdateScore(int score)
     {

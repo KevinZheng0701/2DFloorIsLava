@@ -6,7 +6,7 @@ public class TileState : MonoBehaviour
 {
     private bool isSelected;
     private float timer;
-    [SerializeField] ColorChange colorChangeScript;
+    public ColorChange colorChangeScript;
 
     // Start is called before the first frame update
     void Start()

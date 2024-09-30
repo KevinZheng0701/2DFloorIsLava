@@ -9,8 +9,8 @@ public class TilesMap : MonoBehaviour
     public Vector3 originPosition;
     public float cellSize;
     public GameObject[,] tiles;
-    [SerializeField] GameObject tilePrefab;
-    [SerializeField] GameObject tileParent;
+    public GameObject tilePrefab;
+    public GameObject tileParent;
 
     // Start is called before the first frame update
     void Start()

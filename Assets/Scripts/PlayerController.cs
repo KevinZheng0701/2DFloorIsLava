@@ -4,37 +4,29 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public bool canMove; 
     public float speed;
-    private bool isSingle;
     public bool isPlayerOne;
-    [SerializeField] string horizontalAxis;
-    [SerializeField] string verticalAxis;
+    public string horizontalAxis;
+    public string verticalAxis;
 
-    // Start is called before the first frame update
-    void Start()
+    // Awake is called during script loading
+    void Awake()
     {
-        isSingle = GameDataManager.Instance.isSinglePlayer;
-        if (isSingle && isPlayerOne)
+        if (GameDataManager.Instance.isSinglePlayer)
         {
-            canMove = true;
-        }
+            transform.position = new Vector3(0, 0, -1);
+            if (!isPlayerOne)
+            {
+                gameObject.SetActive(false);
+            }
+        } 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    // Fixed update is called 50 times per second
+    // Fixed update is called every physics update
     void FixedUpdate()
     {
-        if (canMove)
-        {
-            Vector3 newDirection = Direction();
-            transform.Translate(newDirection * speed); // Move the position of the player based on WASD
-        }
+        Vector3 newDirection = Direction();
+        transform.Translate(newDirection * speed); // Move the position of the player based on WASD
     }
 
     // Function to find the direction based on the WASD/joystick/keyboard
