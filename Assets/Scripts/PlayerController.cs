@@ -14,12 +14,12 @@ public class PlayerController : MonoBehaviour
     {
         if (GameDataManager.Instance.isSinglePlayer)
         {
-            transform.position = new Vector3(0, 0, -1);
+            transform.position = Vector3.zero;
             if (!isPlayerOne)
             {
                 gameObject.SetActive(false);
             }
-        } 
+        }
     }
 
     // Fixed update is called every physics update

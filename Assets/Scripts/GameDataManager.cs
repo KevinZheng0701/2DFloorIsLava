@@ -23,8 +23,13 @@ public class GameDataManager : MonoBehaviour
         }
     }
 
-    public void SetSinglePlayer(bool isSingle)
+    public void SetToSinglePlayer()
     {
-        isSinglePlayer = isSingle;
+        isSinglePlayer = true;
+    }
+
+    public void SetToTwoPlayers()
+    {
+        isSinglePlayer = false;
     }
 }

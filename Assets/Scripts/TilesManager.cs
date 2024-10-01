@@ -12,7 +12,7 @@ public class TilesManager : MonoBehaviour
     public TilesMap tilesMap;
     public GameManager gameManager;
     public SceneChanger sceneChanger;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,7 +54,6 @@ public class TilesManager : MonoBehaviour
     public IEnumerator CheckPlayer(float time)
     {
         yield return new WaitForSeconds(time * 0.4f);
-        Debug.Log("Checking now: " + time * 0.4f);
         isDanger = true;
         yield return new WaitForSeconds(time * 0.6f);
         isDanger = false;
@@ -70,6 +69,7 @@ public class TilesManager : MonoBehaviour
         SpriteRenderer spriteRender2 = tile2.GetComponent<SpriteRenderer>();
         if (spriteRender1.color == Color.red || spriteRender2.color == Color.red)
         {
+            GameDataManager.Instance.timeSurvived = gameManager.timer;
             sceneChanger.MoveToScene(2);
         }
     }

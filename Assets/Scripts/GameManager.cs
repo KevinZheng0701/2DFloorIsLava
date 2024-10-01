@@ -6,14 +6,14 @@ public class GameManager : MonoBehaviour
 {
     public int level;
     public float timer;
-    [SerializeField] TilesManager tilesManager;
-    [SerializeField] UIManager uiManager;
-    [SerializeField] int[] levelTimer;
+    public TilesManager tilesManager;
+    public UIManager uiManager;
+    public int[] levelTimer;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
