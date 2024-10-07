@@ -5,20 +5,23 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    public TextMeshProUGUI timerText;
-    public TextMeshProUGUI levelText;
-    public TextMeshProUGUI finalTimerText;
+    public TextMeshProUGUI timerText; // Timer ui
+    public TextMeshProUGUI levelText; // Level ui
+    public TextMeshProUGUI finalTimerText; // Final timer ui
 
+    // Function to update the timer in the game scene
     public void UpdateTimer(float time)
     {
         timerText.text = "Time: " + Mathf.Round(time).ToString();
     }
 
+    // Function to update the time survived in the end scene
     public void UpdateFinalTimer(float time)
     {
         finalTimerText.text = "You survived for " + Mathf.Round(time).ToString() + " seconds!";
     }
 
+    // Function to update the level text display
     public void UpdateLevel(int level)
     {
         levelText.text = "Level: " + level.ToString();

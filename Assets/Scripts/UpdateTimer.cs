@@ -4,18 +4,13 @@ using UnityEngine;
 
 public class UpdateTimer : MonoBehaviour
 {
-    public UIManager uiManager;
+    public UIManager uiManager; // Reference the ui manager
 
     // Start is called before the first frame update
     void Start()
     {
-        GameDataManager gameDataManager = GameObject.FindGameObjectWithTag("Data").GetComponent<GameDataManager>();
+        // Get the time survived from the data manager and update the final time survived
+        GameDataManager gameDataManager = GameDataManager.Instance;
         uiManager.UpdateFinalTimer(gameDataManager.timeSurvived);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

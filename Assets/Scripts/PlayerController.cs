@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed;
-    public bool isPlayerOne;
-    public string horizontalAxis;
-    public string verticalAxis;
+    public float speed; // Speed of the player
+    public bool isPlayerOne; // Indicate whether this player is the first player
+    public string horizontalAxis; // Input manager for horizontal axis
+    public string verticalAxis; // Input manager for vertical axis
 
     // Awake is called during script loading
     void Awake()
     {
+        // If the use selects single player mode
         if (GameDataManager.Instance.isSinglePlayer)
         {
+            // Move the player to the center
             transform.position = Vector3.zero;
+            // Remove the second player
             if (!isPlayerOne)
             {
                 gameObject.SetActive(false);

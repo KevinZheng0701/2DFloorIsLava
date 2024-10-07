@@ -26,7 +26,18 @@ public class TilesManager : MonoBehaviour
         // Check if right now is dangerous
         if (isDanger)
         {
-            CheckSafety(); // Check the safety of the players
+            bool isSafe = CheckSafety(player1); // Check the safety of the first player
+            // If there is a second player then check if it is safe
+            if (!GameDataManager.Instance.isSinglePlayer)
+            {
+                isSafe = isSafe && CheckSafety(player2); // Use and statement to get the safeness of both players
+            }
+            // If it is not safe then go to end scene and update the time survived
+            if (!isSafe)
+            {
+                GameDataManager.Instance.timeSurvived = gameManager.timer;
+                sceneChanger.MoveToScene(2);
+            }
         }
         // Timer reached the time to select new tiles
         if (timer > tilesInterval)
@@ -58,24 +69,26 @@ public class TilesManager : MonoBehaviour
     // Function to check if player is in danger mode
     public IEnumerator CheckPlayer(float time)
     {
+        // After all tiles are red set danger to be true
         yield return new WaitForSeconds(time * 0.4f);
         isDanger = true;
+        // After tiles turn back into white set danger to be false
         yield return new WaitForSeconds(time * 0.6f);
         isDanger = false;
     }
 
-    private void CheckSafety()
+    // Function to check whether the player is safe
+    private bool CheckSafety(Transform player)
     {
-        Vector3 playerPos = player1.transform.position;
-        Vector3 playerPos2 = player2.transform.position;
-        GameObject tile1 = tilesMap.GetTileUnderPlayer(playerPos);
-        GameObject tile2 = tilesMap.GetTileUnderPlayer(playerPos2);
-        SpriteRenderer spriteRender1 = tile1.GetComponent<SpriteRenderer>();
-        SpriteRenderer spriteRender2 = tile2.GetComponent<SpriteRenderer>();
-        if (spriteRender1.color == Color.red || spriteRender2.color == Color.red)
+        // Get the tiles under the player
+        Vector3 playerPos = player.transform.position;
+        GameObject tile = tilesMap.GetTileUnderPlayer(playerPos);
+        SpriteRenderer spriteRender = tile.GetComponent<SpriteRenderer>();
+        // If the tile is red then it is not safe
+        if (spriteRender.color == Color.red)
         {
-            GameDataManager.Instance.timeSurvived = gameManager.timer;
-            sceneChanger.MoveToScene(2);
+            return false;
         }
+        return true;
     }
 }
