@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class GameDataManager : MonoBehaviour
 {
-    public static GameDataManager Instance;
-    public bool isSinglePlayer;
-    public float timeSurvived;
+    public static GameDataManager Instance; // Singleton for game data
+    public bool isSinglePlayer; // Holds the status whether the game is in single or two player mode
+    public float timeSurvived; // Time survived in the current game
 
     // Called when the scripts are loading
     private void Awake()
     {
-        //Instance = GameObject.FindGameObjectWithTag("Data").GetComponent<GameDataManager>();
         if (Instance == null) // Instance hasn't been set
         {
             Instance = this; // Set the instance to the game object it is attached to
@@ -23,11 +22,13 @@ public class GameDataManager : MonoBehaviour
         }
     }
 
+    // Function to set to single player
     public void SetToSinglePlayer()
     {
         isSinglePlayer = true;
     }
 
+    // Function to set to two players
     public void SetToTwoPlayers()
     {
         isSinglePlayer = false;

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class TilesManager : MonoBehaviour
 {
-    private bool isDanger;
-    private float timer;
-    public float tilesInterval;
-    public Transform player1;
-    public Transform player2;
-    public TilesMap tilesMap;
-    public GameManager gameManager;
-    public SceneChanger sceneChanger;
+    private bool isDanger; // Boolean to determine whether the player is in danger zone
+    private float timer; // Timer to select tiles
+    public float tilesInterval; // The interval for selecting tiles
+    public Transform player1; // Position of player 1
+    public Transform player2; // Position of player 2
+    public TilesMap tilesMap; // Reference the tiles
+    public GameManager gameManager; // Reference the game manager
+    public SceneChanger sceneChanger; // Reference the scene changer
 
     // Start is called before the first frame update
     void Start()
@@ -22,35 +22,40 @@ public class TilesManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
+        timer += Time.deltaTime; // Update time
+        // Check if right now is dangerous
         if (isDanger)
         {
-            CheckSafety();
+            CheckSafety(); // Check the safety of the players
         }
+        // Timer reached the time to select new tiles
         if (timer > tilesInterval)
         {
-            timer = 0;
-            SelectTiles((gameManager.level + 1) * (gameManager.level + 1));
+            timer = 0; // Reset the timer
+            SelectTiles((gameManager.level + 1) * (gameManager.level + 1)); // Select new tiles with difficulty adjusted
         }
     }
 
+    // Function to select a certain number of tiles
     private void SelectTiles(int numberOfTiles)
     {
-        float selectedTime = tilesInterval / 1.5f;
+        float selectedTime = tilesInterval / 1.5f; // The time for the tile to be selected
         for (int i = 0; i < numberOfTiles; i++)
         {
-            GameObject tile = tilesMap.GetRandomTile();
-            TileState state = tile.GetComponent<TileState>();
+            GameObject tile = tilesMap.GetRandomTile(); // Get a random tile
+            TileState state = tile.GetComponent<TileState>(); // Get the tile state
+            // Get new tile if the previously selected tile is already selected
             while (state.GetIsSelected())
             {
                 tile = tilesMap.GetRandomTile();
                 state = tile.GetComponent<TileState>();
             }
-            state.SelectTile(selectedTime);
+            state.SelectTile(selectedTime); // Update the state of the tile
         }
-        StartCoroutine(CheckPlayer(selectedTime));
+        StartCoroutine(CheckPlayer(selectedTime)); // Start the coroutine to check the player after the selected time
     }
 
+    // Function to check if player is in danger mode
     public IEnumerator CheckPlayer(float time)
     {
         yield return new WaitForSeconds(time * 0.4f);
